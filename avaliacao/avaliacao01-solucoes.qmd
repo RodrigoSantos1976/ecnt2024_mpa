@@ -1,0 +1,194 @@
+---
+title: "Resolução da Avaliação 1"
+subtitle: "Econometria Aplicada à Finanças"
+author: "Rodrigo Emiliano dos Santos"
+title-block-banner: "#27445C"
+format:
+  html:
+    embed-resources: true
+    toc: true
+    toc-location: left
+lang: "pt"
+date: today
+date-format: long
+execute: 
+  echo: false
+  warning: false
+  message: false
+crossref:
+  fig-prefix: 'Fig.'
+  tbl-prefix: 'Tab.'
+bibliography: referencias.bibtex
+csl: associacao-brasileira-de-normas-tecnicas-ipea.csl
+---
+
+```{r}
+#| label: setup
+
+# pacotes utilizados
+library(here)
+library(tidyverse)
+```
+
+
+
+
+## Questão 1 - Questões Conceituais
+
+
+**a.**
+Quando dizemos que um estimador é viesado em relação ao parâmetro que ele tenta estimar, significa que, em média, o estimador não "acerta" o valor verdadeiro do parâmetro populacional.
+
+Se o estimador de 𝛽, que chamamos de $\hat{\beta}$, é viesado para 𝛽, isso significa que, em média, ele não acerta o valor verdadeiro do parâmetro. Ou seja, se repetirmos o processo de estimação muitas vezes, usando diferentes amostras de dados, o valor médio de $\hat{\beta}$, vai acabar ficando consistentemente acima ou abaixo do valor real de 𝛽
+
+
+**b.** 
+
+A definição formal (matemática) de viés de um estimador é dada pela diferença entre o valor esperado do estimador e o verdadeiro valor do parâmetro que se deseja estimar.
+
+**c.** 
+
+Nos importamos se o estimador de Mínimos Quadrados Ordinários (MQO) ou qualquer outro estimador é viesado porque o viés afeta a precisão e a confiabilidade dos resultados da estimativa. Quando um estimador é viesado, ele introduz um erro sistemático no processo de estimação, o que significa que, em média, o estimador não atingirá o valor verdadeiro do parâmetro que se deseja estimar.
+
+**d.** 
+Os estimadores B e C são não viesados, enquanto o estimador A é viesado.
+
+**e.** 
+A distribuição do estimador A é a mais concentrada e estreita, apesar de ser viesada. Isso indica que suas estimativas estão mais próximas umas das outras, o que significa que o estimador A possui a menor variância entre os três.
+
+**f.** 
+o melhor estimador não viesado, com a menor variância, é o Estimador B.
+
+**g.** 
+o viés de um estimador refere-se a um desvio sistemático entre o valor estimado e o verdadeiro efeito que os gastos em publicidade têm sobre as vendas. Se o estimador é viesado, isso significa que, em média, ele não está capturando corretamente a relação entre essas duas variáveis, podendo subestimar ou superestimar o verdadeiro efeito.
+
+**h.** 
+O erro padrão é uma medida da variabilidade ou dispersão das estimativas de um parâmetro em um modelo estatístico. Ele indica o quão longe, em média, as estimativas de um parâmetro (como a média ou um coeficiente de regressão) estarão do valor verdadeiro do parâmetro, se repetíssemos a amostra várias vezes.
+
+**i.** 
+A afirmação está correta porque a ausência de viés (ou ser "não viesado") refere-se a uma propriedade de amostras de tamanho finito. Um estimador é não viesado se, em média, ele fornecer o valor correto do parâmetro a ser estimado, independentemente do tamanho da amostra. Isso significa que, para qualquer tamanho de amostra,
+
+**j.** 
+Um estimador é consistente quando ele se aproxima do valor verdadeiro do parâmetro que está sendo estimado
+
+**l.** 
+O Estimador B, embora viesado, é consistente, o que significa que, conforme o tamanho da amostra cresce, ele convergirá para o valor verdadeiro do parâmetro.
+No caso do Estimador A, mesmo sendo não viesado, ele não é consistente, o que significa que, mesmo com amostras maiores, ele não garante que se aproximará do valor correto do parâmetro
+
+**m.** 
+Heterocedasticidade refere-se a uma característica de um modelo de regressão em que a variância dos erros (ou resíduos) não é constante ao longo das observações.
+
+**n.**
+Estamos preocupados com a heterocedasticidade em modelos de regressão porque ela pode comprometer a qualidade das inferências estatísticas e a eficiência dos estimadores
+
+**o.** 
+No gráfico de dispersão entre resíduos (ou erro) e os valores preditos, se os resíduos parecerem ter um padrão — por exemplo, formando um funil (onde a variância aumenta ou diminui com o aumento dos valores preditos) — isso pode indicar heterocedasticidade.
+
+Ausência de heterocedasticidade (homocedasticidade): Os resíduos devem estar distribuídos aleatoriamente ao redor de zero, sem padrões evidentes e com variação aproximadamente constante.
+
+Presença de heterocedasticidade: Os resíduos apresentam padrões claros, como um aumento na dispersão à medida que os valores preditos aumentam ou diminuem.
+
+**p.** 
+Fazer o gráfico de dispersão entre os valores de uma variável dependente e uma variável independente, por si só, não é suficiente para detectar heterocedasticidade. O que realmente é útil para identificar heterocedasticidade é o gráfico de dispersão dos resíduos (diferença entre os valores observados e os preditos) contra os valores ajustados ou as variáveis independentes.
+
+**q.** 
+Como não podemos observar diretamente os erros populacionais, que são as diferenças entre os valores reais da variável dependente e os valores preditos pela "verdadeira" relação populacional, podemos usar os resíduos que são as estimativas dos erros.
+
+**r.** 
+Para a maioria dos casos gerais, o teste de Breusch-Pagan como ponto de partida. Isso porque:
+
+Simplicidade: Ele é fácil de implementar e interpretar.
+Foco nas variáveis explicativas: Ele detecta heterocedasticidade que está relacionada às variáveis independentes.
+Eficiência: Funciona bem com modelos lineares simples e múltiplos.
+
+
+
+## Questão 2 - Análise 
+
+
+**a.** Baixe o arquivo de dados `bertrand2004.csv`. Coloque o arquivo na 
+subpasta `data/raw` do seu projeto `ecnt2024_mpa`. 
+Importe este arquivo utilizando o pacote `here` e a função apropiada do 
+pacote `readr`. Qual a dimensão dos dados importados. 
+
+
+
+**b.** Quais são os dois primeiros *primeiros nomes* no conjunto de dados 
+(variável `first_name`)?
+
+
+
+**c.** Qual é a porcentagem de currículos que receberam um retorno (variável 
+`i_callback`)?
+
+
+
+
+**d.** Calcule a porcentagem de retornos (_isto é_, a média de 
+`i_callback`) para cada grupo racial (`race`). Parece que os empregadores 
+consideraram a raça do candidato ao fazer os retornos? Explique.
+
+
+
+**e.** Qual é a diferença na taxa média de retorno entre os grupos?
+
+
+
+**f.** Com base na diferença nas porcentagens que observamos no item **d**, 
+podemos concluir que os empregadores consideram a raça nas decisões de 
+contratação? **Explique sua resposta.**
+
+
+
+**g.** Sem estimar uma regressão, realize um teste estatístico para a 
+diferença nas taxas médias de retorno entre os dois grupos (_isto é_, 
+teste se a proporção de retornos é igual para os dois grupos).
+
+
+
+
+**h.** Agora faça a regressão de `i_callback` (se o currículo gerou um retorno) 
+contra `i_black` (se o nome do currículo indicava um candidato negro). Reporte 
+a estimativa do parâmetro de `i_black`. Ele corresponde à diferença que 
+você encontrou em **e**?
+
+
+**i.** Realize um teste *t* para o coeficiente de `i_black` na regressão 
+feita no item **f**. Escreva suas hipóteses (tanto $H_0$ quanto $H_A$), 
+a estatística do teste, o valor-p, o resultado do teste (isto é, 
+rejeitar ou não rejeitar $H_0$), e sua conclusão.
+
+
+
+**j.** Agora faça a regressão de `i_callback` (se o currículo gerou um 
+retorno) contra `i_black`, `n_expr` (anos de experiência) e a interação 
+entre `i_black` e `n_expr`. Interprete as estimativas dos coeficientes 
+(tanto o significado dos coeficientes quanto se eles são estatisticamente 
+significativos).
+
+
+
+
+
+## Questão 3 - Pensando sobre Causalidade
+
+
+**a.** 
+
+
+**b.** 
+
+
+**c.** 
+
+
+
+
+
+## Referências
+
+::: {#refs}
+:::
+
+
+
